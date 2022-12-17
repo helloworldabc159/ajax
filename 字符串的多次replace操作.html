@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // var str = "<div>{{name}}今年{{ age }}岁了</div>";
+      // var pattern = /{{\s*([a-zA-Z]+)\s*}}/;
+      // var res1 = pattern.exec(str);
+      // str = str.replace(res1[0], res1[1]);
+      // console.log(str);
+      // var res2 = pattern.exec(str);
+      // str = str.replace(res2[0], res2[1]);
+      // console.log(str);
+      // 使用while循环replace
+      var data = { name: "张三", age: 20 };
+      var str = "<div>{{name}}今年{{ age }}岁了</div>";
+      var pattern = /{{\s*([a-zA-Z]+)\s*}}/;
+      // var patternresult = null;
+      // while ((patternresult = pattern.exec(str))) {
+      //   str = str.replace(patternresult[0], patternresult[1]);
+      // }
+      while (pattern.exec(str) !== null) {
+        str = str.replace(pattern.exec(str)[0], data[pattern.exec(str)[1]]);
+      }
+      console.log(str);
+    </script>
+  </body>
+</html>

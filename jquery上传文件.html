@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.css" />
+    <script src="jquery.min.js"></script>
+  </head>
+  <body>
+    <input type="file" id="file1" />
+    <button id="btn-upload">上传</button>
+    <script>
+      $("#btn-upload").on("click", function () {
+        //这个$("#file1")[0]是把jquery对象转换为dom对象
+        //使用Files类必须先创建Files类的实例，创建格式如下所示。
+        //var 实例名 = 文件域.files;
+        var files = $("#file1")[0].files;
+        if (files.length <= 0) {
+          return alert("请选择文件后再上传");
+        }
+        var fd = new FormData();
+        fd.append("avatar", files[0]);
+        $.ajax({
+          method: "post",
+          url: "http://www.liulongbin.top:3006/api/upload/avatar",
+          data: fd,
+          processData: false,
+          contentType: false,
+          success: function (res) {
+            console.log(res);
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

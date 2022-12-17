@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.1/axios.js"></script>
+  </head>
+  <body>
+    <button id="btn">发起GET请求</button>
+    <button id="btn1">发起post请求</button>
+    <button id="btn2">直接使用axios发起GET请求</button>
+    <button id="btn3">直接使用axios发起POST请求</button>
+    <script>
+      document.querySelector("#btn").addEventListener("click", function () {
+        //请求的url地址
+        let url = "http://www.liulongbin.top:3006/api/get";
+        //请求的参数对象
+        let paramsObj = { name: "zs", age: 20 };
+        //发起get请求
+        axios.get(url, { params: paramsObj }).then(function (res) {
+          console.log(res);
+          //res并不是服务器返回回来的信息，而是axios封装起来的信息，res.data才是服务器返回的信息
+        });
+      });
+      document.querySelector("#btn1").addEventListener("click", function () {
+        let url = "http://www.liulongbin.top:3006/api/post";
+        let dataObj = { location: "广东", address: "江门" };
+        axios.post(url, dataObj).then(function (res) {
+          console.log(res);
+          console.log(res.data);
+        });
+      });
+      document.querySelector("#btn2").addEventListener("click", function () {
+        let url = "http://www.liulongbin.top:3006/api/get";
+        let paramsData = { name: "小明", age: 15 };
+        axios({
+          method: "GET",
+          url: url,
+          params: paramsData,
+        }).then(function (res) {
+          console.log(res.data);
+        });
+      });
+      document.querySelector("#btn3").addEventListener("click", function () {
+        let url = "http://www.liulongbin.top:3006/api/post";
+        axios({
+          method: "post",
+          url: url,
+          data: {
+            name: "abc",
+            age: 18,
+            weight: "75kg",
+            height: "178cm",
+          },
+        }).then(function (res) {
+          console.log(res);
+        });
+      });
+    </script>
+  </body>
+</html>

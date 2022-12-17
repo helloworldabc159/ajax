@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="jquery.min.js"></script>
+    <script src="template-web.js"></script>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script type="text/html" id="tpl-user">
+      <h1>{{reg | dataFormat}}</h1>
+    </script>
+    <script>
+      template.defaults.imports.dataFormat = function (date) {
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        var d = date.getDate();
+        return y + "-" + m + "-" + d;
+      };
+      var data = { reg: new Date() };
+      var htmlStr = template("tpl-user", data);
+      $("#container").html(htmlStr);
+    </script>
+  </body>
+</html>
